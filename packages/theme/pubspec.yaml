@@ -1,0 +1,9 @@
+name: theme
+description: A theme package for my project.
+
+environment:
+  sdk: '>=2.14.0 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
