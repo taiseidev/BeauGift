@@ -1,8 +1,11 @@
+import 'dart:html' as html; // 追加
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:payment/firebase_options.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -11,26 +14,24 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      onGenerateRoute: (settings) {
-        final data =
-            Uri.parse(settings.name ?? "デフォルト値").queryParameters['data'];
-        return MaterialPageRoute(
-          builder: (context) => DisplayScreen(data: data!),
-        );
-      },
+      home: DisplayScreen(),
     );
   }
 }
 
 class DisplayScreen extends StatelessWidget {
-  final String data;
+  // const は削除してコンストラクタ内でdataを初期化
+  DisplayScreen({Key? key})
+      : data = Uri.parse(html.window.location.href).queryParameters['data'] ??
+            "デフォルト値",
+        super(key: key);
 
-  const DisplayScreen({super.key, required this.data});
+  final String data;
 
   @override
   Widget build(BuildContext context) {
