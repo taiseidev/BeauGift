@@ -111,9 +111,6 @@ unlinked_spec.ds
 # linux
 **/linux
 
-# Web
-**/web
-
 # Coverage
 coverage/
 

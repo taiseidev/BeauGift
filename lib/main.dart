@@ -12,8 +12,6 @@ Future<void> main() async {
     url: dotenv.get("SUPABASE_PROJECT_URL"),
     anonKey: dotenv.get("SUPABASE_API_KEY"),
   );
-
-  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
