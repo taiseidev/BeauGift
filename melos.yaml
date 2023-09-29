@@ -1,0 +1,4 @@
+name: beaugift_app
+
+packages:
+  - apps/**
