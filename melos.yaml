@@ -2,3 +2,7 @@ name: beaugift_app
 
 packages:
   - apps/**
+
+scripts:
+  bootstrap: melos bootstrap
+  clean: melos clean
