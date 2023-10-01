@@ -14,3 +14,35 @@
 フレームワークは検討中
 ・express
 ・NestJS
+
+```
+├── lib/
+│   ├── main.dart
+│   ├── app.dart
+│   ├── views/
+│   │   ├── home_view.dart
+│   │   └── ...
+│   ├── widgets/
+│   │   ├── payment_button.dart
+│   │   └── ...
+│   ├── models/
+│   │   ├── user.dart
+│   │   └── payment.dart
+│   ├── services/
+│   │   ├── paypay_service.dart
+│   │   ├── stripe_service.dart
+│   │   └── user_service.dart
+│   ├── utils/
+│   │   ├── constants.dart
+│   │   └── ...
+│   └── config/
+│       ├── routes.dart
+│       └── ...
+├── web/
+│   ├── index.html
+│   ├── favicon.png
+│   └── ...
+├── pubspec.yaml
+└── README.md
+
+```
