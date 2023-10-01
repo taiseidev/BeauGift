@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:payment/main.dart';
+import 'package:payment/pages/home_page.dart';
 
 class PaymentPackage extends StatelessWidget {
   const PaymentPackage({Key? key}) : super(key: key);
@@ -7,7 +7,7 @@ class PaymentPackage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: DisplayScreen(),
+      home: HomePage(),
     );
   }
 }
