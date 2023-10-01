@@ -1,16 +1,16 @@
-# payment
+# 決済画面
 
-A new Flutter project.
+・ユーザがアプリをインストールしていなくても利用できる
+・Strip決済、PayPay決済、Giftee送信から選択する
+・ボタン押下後、各APIが発火して決済処理が走る。
+・決済が完了したら完了画面に遷移し、アプリのインストールを促す
+→ 決済した情報は端末に保存し、会員登録が完了したら反映させる
 
-## Getting Started
+必要API
+・StripeAPI
+・PayPayAPI
+・GifteeAPI
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+フレームワークは検討中
+・express
+・NestJS
