@@ -1,24 +1,25 @@
 import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_floating_bottom_bar/flutter_floating_bottom_bar.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mobile/navigation/router.dart';
 import 'package:theme/colors.dart';
 
 Future<void> main() async {
   await Common.init();
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
+  Widget build(BuildContext context, WidgetRef ref) {
+    final router = ref.watch(routerProvider);
+
+    return MaterialApp.router(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      routerConfig: router,
     );
   }
 }
@@ -58,11 +59,6 @@ class _MyHomePageState extends State<MyHomePage>
   }
 
   List<IconData> icons = [
-    // FontAwesomeIcons.house,
-    // FontAwesomeIcons.magnifyingGlass,
-    // FontAwesomeIcons.addressBook,
-    // FontAwesomeIcons.faceDizzy,
-    // FontAwesomeIcons.streetView,
     Icons.home,
     Icons.search,
     Icons.wallet_giftcard,
@@ -122,10 +118,10 @@ class _MyHomePageState extends State<MyHomePage>
                   controller: tabController,
                   physics: const NeverScrollableScrollPhysics(),
                   children: const [
-                    SizedBox.shrink(),
-                    SizedBox.shrink(),
-                    SizedBox.shrink(),
-                    SizedBox.shrink(),
+                    HomePage(),
+                    SearchPage(),
+                    GiftPage(),
+                    MessagePage(),
                     SizedBox.shrink(),
                   ],
                 ),
@@ -162,5 +158,60 @@ class _MyHomePageState extends State<MyHomePage>
   void dispose() {
     tabController.dispose();
     super.dispose();
+  }
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Text("ホーム画面"),
+    );
+  }
+}
+
+class SearchPage extends StatelessWidget {
+  const SearchPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Text("検索画面"),
+    );
+  }
+}
+
+class HomePage1 extends StatelessWidget {
+  const HomePage1({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Text("ホーム画面1"),
+    );
+  }
+}
+
+class GiftPage extends StatelessWidget {
+  const GiftPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Text("ギフト画面"),
+    );
+  }
+}
+
+class MessagePage extends StatelessWidget {
+  const MessagePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Text("メッセージ画面"),
+    );
   }
 }
