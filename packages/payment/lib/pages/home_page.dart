@@ -3,6 +3,7 @@ import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:theme/colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatelessWidget {
@@ -16,7 +17,10 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('QR Data')),
+      appBar: AppBar(
+        backgroundColor: AppColor.primary,
+        title: const Text('QR Data'),
+      ),
       body: Center(
         child: Column(
           children: [
