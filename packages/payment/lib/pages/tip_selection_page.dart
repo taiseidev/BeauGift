@@ -18,40 +18,197 @@ class TipSelectionPage extends StatelessWidget {
           ),
         ),
       ),
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          double width = constraints.maxWidth;
-          double height = constraints.maxHeight;
+      body: Center(
+        child: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+            if (constraints.maxWidth < 600) {
+              return const _MobileSection();
+            } else {
+              return const _WebSection();
+            }
+          },
+        ),
+      ),
+    );
+  }
+}
 
-          if (width > 600.0) {
-            width = 600.0;
-          }
+class _MobileSection extends StatelessWidget {
+  const _MobileSection();
 
-          return Center(
-            child: SizedBox(
-              width: width,
-              child: Column(
-                children: [
-                  const SizedBox(height: 40),
-                  SizedBox(
-                    height: height * 0.4,
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16),
-                      child: _TipButtonsSection(),
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
+    return Scrollbar(
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(height: 16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.network(
+                    "https://cdn.pixabay.com/photo/2021/11/23/13/42/barber-6818707_1280.jpg",
+                    fit: BoxFit.cover,
+                    width: 150,
+                    height: 150,
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "affect【アフェクト】",
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.grey,
+                      ),
                     ),
+                    const SizedBox(height: 8),
+                    Text(
+                      "佐藤 雄一",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        color: AppColor.secondary,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            const SizedBox(height: 24),
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: EdgeInsets.only(left: 40),
+                child: Text(
+                  'チップを選択してください。',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
                   ),
-                  const SizedBox(height: 40),
-                  const _TipSumSection(),
-                  const SizedBox(height: 40),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 80),
-                    child: _ConfirmButton(),
-                  ),
-                ],
+                ),
               ),
             ),
-          );
-        },
+            const SizedBox(height: 16),
+            SizedBox(
+              width: size.width * 0.8,
+              height: size.height * 0.3,
+              child: const _TipButtonsSection(),
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24),
+              child: DefaultTextStyle(
+                style: TextStyle(
+                  fontSize: 10,
+                  color: Colors.grey,
+                  fontWeight: FontWeight.bold,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    IndentedBulletText(
+                      text:
+                          "チップは施術者への感謝の気持ちを表すものです。サービスに満足した場合には、適切な金額を選択してください。",
+                    ),
+                    SizedBox(height: 4),
+                    IndentedBulletText(
+                      text: "チップは任意であり、強制ではありません。ご自身の判断でお選びください。",
+                    ),
+                    SizedBox(height: 4),
+                    Text("・一度送信されたチップは返金できません。"),
+                    SizedBox(height: 4),
+                    IndentedBulletText(
+                      text: "このボタンを押してもすぐには決済されません。最終確認後に決済が完了します。",
+                    ),
+                    SizedBox(height: 4),
+                    IndentedBulletText(
+                      text: "1チップ = 1円として計算されます。",
+                    ),
+                    SizedBox(height: 4),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 40),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _WebSection extends StatelessWidget {
+  const _WebSection();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Image.network(
+              'https://cdn.pixabay.com/photo/2021/11/23/13/42/barber-6818707_1280.jpg',
+              fit: BoxFit.cover,
+            ),
+          ),
+          const SizedBox(height: 20),
+          const Text(
+            'Play',
+            style: TextStyle(
+              fontSize: 32,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const Row(
+            children: [
+              CircleAvatar(
+                backgroundImage:
+                    NetworkImage('https://example.com/path/to/avatar.jpg'),
+                radius: 20,
+              ),
+              SizedBox(width: 10),
+              Text('@BOTD'),
+            ],
+          ),
+          const SizedBox(height: 10),
+          const Text('Current bid'),
+          const Text('0.20 ETH', style: TextStyle(fontSize: 24)),
+          const SizedBox(height: 10),
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Icon(Icons.collections, color: Colors.grey),
+                  SizedBox(width: 5),
+                  Text('The COLLABOR8'),
+                ],
+              ),
+              Text('Auction ends in'),
+            ],
+          ),
+          const Text('16h 0m 7s', style: TextStyle(fontSize: 24)),
+          const SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+              foregroundColor: Colors.white,
+              backgroundColor: Colors.black,
+              minimumSize: const Size(double.infinity, 50),
+            ),
+            child: const Text('Place bid'),
+          ),
+        ],
       ),
     );
   }
@@ -67,7 +224,6 @@ class _TipButtonsSection extends StatelessWidget {
     1000,
     3000,
     5000,
-    10000,
   ];
 
   @override
@@ -80,38 +236,9 @@ class _TipButtonsSection extends StatelessWidget {
       ),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        mainAxisSpacing: 16,
-        crossAxisSpacing: 16,
-        childAspectRatio: 5.0,
-      ),
-    );
-  }
-}
-
-class _TipSumSection extends StatelessWidget {
-  const _TipSumSection();
-
-  @override
-  Widget build(BuildContext context) {
-    return RichText(
-      text: const TextSpan(
-        style: TextStyle(
-          fontWeight: FontWeight.w700,
-          color: Colors.black,
-        ),
-        children: [
-          TextSpan(
-            text: '合計 ',
-          ),
-          TextSpan(
-              text: '3300',
-              style: TextStyle(
-                fontSize: 32,
-              )),
-          TextSpan(
-            text: 'tip',
-          ),
-        ],
+        mainAxisSpacing: 8,
+        crossAxisSpacing: 8,
+        childAspectRatio: 3.0,
       ),
     );
   }
@@ -126,48 +253,68 @@ class _TipButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {},
-      child: Container(
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          border: Border.all(),
+    return ElevatedButton(
+      onPressed: () {
+        // チップを総量に追加する
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
         ),
-        child: Text(
-          "+$amount tip",
+      ),
+      child: RichText(
+        text: TextSpan(
           style: const TextStyle(
-            fontSize: 24,
+            color: Colors.black,
             fontWeight: FontWeight.w700,
+            fontSize: 16,
           ),
+          children: [
+            TextSpan(
+              text: '$amount',
+            ),
+            const TextSpan(
+              text: ' チップ',
+              style: TextStyle(fontSize: 12),
+            ),
+          ],
         ),
       ),
     );
   }
 }
 
-class _ConfirmButton extends StatelessWidget {
-  const _ConfirmButton();
+// TODO(taisei) 2行までしか対応していない
+class IndentedBulletText extends StatelessWidget {
+  final String text;
+  final TextStyle? style;
+  final String bulletPoint;
+
+  const IndentedBulletText({
+    super.key,
+    required this.text,
+    this.style,
+    this.bulletPoint = '・',
+  });
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    return GestureDetector(
-      onTap: () {},
-      child: Container(
-        width: size.width,
-        height: 50,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: Colors.black,
-        ),
-        alignment: Alignment.center,
-        child: const Text(
-          "決定",
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-      ),
+    final textPainter = TextPainter(
+      text: TextSpan(text: text, style: style),
+      textDirection: TextDirection.ltr,
     );
+    textPainter.layout(maxWidth: MediaQuery.of(context).size.width);
+
+    final endPositionOfFirstLine = textPainter
+        .getPositionForOffset(
+          Offset(MediaQuery.of(context).size.width, 0),
+        )
+        .offset;
+
+    final firstLineText = text.substring(0, endPositionOfFirstLine);
+    final restOfText = text.substring(endPositionOfFirstLine);
+
+    return Text('$bulletPoint$firstLineText\n　$restOfText');
   }
 }
