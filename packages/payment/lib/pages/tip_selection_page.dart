@@ -123,7 +123,10 @@ class _MobileSection extends StatelessWidget {
               height: size.height * 0.3,
               child: const _TipButtonsSection(),
             ),
-            const _Description(),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24),
+              child: _Description(),
+            ),
             const SizedBox(height: 40),
           ],
         ),
@@ -250,8 +253,56 @@ class _TipButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void showMyDialog() => showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text(
+                '$amountチップをあげますか？',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                  color: AppColor.secondary,
+                ),
+              ),
+              content: const Text(
+                'このボタンを押してもすぐには決済されません。決済選択画面に移動します。',
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.grey,
+                ),
+              ),
+              actions: <Widget>[
+                TextButton(
+                  child: const Text(
+                    '戻る',
+                    style: TextStyle(
+                        color: Colors.grey, fontWeight: FontWeight.bold),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                TextButton(
+                  child: const Text(
+                    '決定',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: () => showMyDialog(),
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.white,
         shape: RoundedRectangleBorder(
