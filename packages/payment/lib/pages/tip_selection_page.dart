@@ -1,10 +1,18 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:payment/pages/indented_bullet_text.dart';
+import 'package:payment/pages/payment_selection_page.dart';
 import 'package:theme/colors.dart';
 
 class TipSelectionPage extends StatelessWidget {
-  const TipSelectionPage({super.key});
+  TipSelectionPage({Key? key})
+      : data =
+            Uri.parse(window.location.href).queryParameters['data'] ?? "デフォルト値",
+        super(key: key);
+
+  final String data;
 
   @override
   Widget build(BuildContext context) {
@@ -25,78 +33,9 @@ class TipSelectionPage extends StatelessWidget {
           if (constraints.maxWidth < 600) {
             return const _MobileSection();
           } else {
-            return const _WebSection();
+            return const SizedBox.shrink();
           }
         },
-      ),
-    );
-  }
-}
-
-class _WebSection extends StatelessWidget {
-  const _WebSection();
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Image.network(
-              'https://cdn.pixabay.com/photo/2021/11/23/13/42/barber-6818707_1280.jpg',
-              fit: BoxFit.cover,
-            ),
-          ),
-          const SizedBox(height: 20),
-          const Text(
-            'Play',
-            style: TextStyle(
-              fontSize: 32,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const Row(
-            children: [
-              CircleAvatar(
-                backgroundImage:
-                    NetworkImage('https://example.com/path/to/avatar.jpg'),
-                radius: 20,
-              ),
-              SizedBox(width: 10),
-              Text('@BOTD'),
-            ],
-          ),
-          const SizedBox(height: 10),
-          const Text('Current bid'),
-          const Text('0.20 ETH', style: TextStyle(fontSize: 24)),
-          const SizedBox(height: 10),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Icon(Icons.collections, color: Colors.grey),
-                  SizedBox(width: 5),
-                  Text('The COLLABOR8'),
-                ],
-              ),
-              Text('Auction ends in'),
-            ],
-          ),
-          const Text('16h 0m 7s', style: TextStyle(fontSize: 24)),
-          const SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              foregroundColor: Colors.white,
-              backgroundColor: Colors.black,
-              minimumSize: const Size(double.infinity, 50),
-            ),
-            child: const Text('Place bid'),
-          ),
-        ],
       ),
     );
   }
@@ -123,6 +62,7 @@ class _MobileSection extends StatelessWidget {
               height: size.height * 0.3,
               child: const _TipButtonsSection(),
             ),
+            const SizedBox(height: 16),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 24),
               child: _Description(),
@@ -293,7 +233,15 @@ class _TipButton extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PaymentSelectionPage(
+                          amount: amount,
+                        ),
+                      ),
+                    );
                   },
                 ),
               ],
