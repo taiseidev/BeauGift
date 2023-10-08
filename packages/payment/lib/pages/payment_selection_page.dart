@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:lottie/lottie.dart';
 import 'package:payment/pages/indented_bullet_text.dart';
 import 'package:theme/colors.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -80,9 +81,9 @@ class _MobileSectionState extends State<_MobileSection> {
                             fontWeight: FontWeight.w700,
                             color: Colors.black,
                           )),
-                      const Icon(
-                        Icons.double_arrow_rounded,
-                        size: 24,
+                      Lottie.asset(
+                        'assets/json/arrow.json',
+                        width: 50,
                       ),
                       ClipRRect(
                         borderRadius: BorderRadius.circular(10),
