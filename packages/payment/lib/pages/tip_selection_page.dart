@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:theme/colors.dart';
 
 class TipSelectionPage extends StatelessWidget {
@@ -78,6 +79,28 @@ class _MobileSection extends StatelessWidget {
                         fontWeight: FontWeight.w700,
                         color: AppColor.secondary,
                       ),
+                    ),
+                    Row(
+                      children: [
+                        IconButton(
+                          icon: const FaIcon(
+                            FontAwesomeIcons.facebook,
+                          ),
+                          onPressed: () {},
+                        ),
+                        IconButton(
+                          icon: const FaIcon(
+                            FontAwesomeIcons.instagram,
+                          ),
+                          onPressed: () {},
+                        ),
+                        IconButton(
+                          icon: const FaIcon(
+                            FontAwesomeIcons.twitter,
+                          ),
+                          onPressed: () {},
+                        ),
+                      ],
                     ),
                   ],
                 ),
