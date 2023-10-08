@@ -64,68 +64,72 @@ class _MobileSectionState extends State<_MobileSection> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 40),
-          child: Column(
-            children: [
-              const SizedBox(height: 16),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+        Scrollbar(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40),
+              child: Column(
                 children: [
-                  Text("${widget.amount}チップ",
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black,
-                      )),
-                  const Icon(
-                    Icons.double_arrow_rounded,
-                    size: 24,
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text("${widget.amount}チップ",
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.black,
+                          )),
+                      const Icon(
+                        Icons.double_arrow_rounded,
+                        size: 24,
+                      ),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.network(
+                          "https://cdn.pixabay.com/photo/2021/11/23/13/42/barber-6818707_1280.jpg",
+                          fit: BoxFit.cover,
+                          width: 80,
+                          height: 80,
+                        ),
+                      )
+                    ],
                   ),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.network(
-                      "https://cdn.pixabay.com/photo/2021/11/23/13/42/barber-6818707_1280.jpg",
-                      fit: BoxFit.cover,
-                      width: 80,
-                      height: 80,
+                  const SizedBox(height: 16),
+                  const Divider(
+                    height: 3,
+                  ),
+                  const SizedBox(height: 16),
+                  const Text(
+                    '決済方法を選択してください。',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
                     ),
-                  )
+                  ),
+                  const SizedBox(height: 16),
+                  _PaymentMethodButton(
+                    text: "PayPayを選択",
+                    onPressed: () async {
+                      setState(() {
+                        isLoading = true;
+                      });
+                      await fetchAndOpenUrl(widget.amount);
+                      setState(() {
+                        isLoading = false;
+                      });
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                  _PaymentMethodButton(
+                    text: "クレジットカード（Stripe）を選択",
+                    onPressed: () {},
+                  ),
+                  const SizedBox(height: 16),
+                  const _Description(),
                 ],
               ),
-              const SizedBox(height: 16),
-              const Divider(
-                height: 3,
-              ),
-              const SizedBox(height: 16),
-              const Text(
-                '決済方法を選択してください。',
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-              const SizedBox(height: 16),
-              _PaymentMethodButton(
-                text: "PayPayを選択",
-                onPressed: () async {
-                  setState(() {
-                    isLoading = true;
-                  });
-                  await fetchAndOpenUrl();
-                  setState(() {
-                    isLoading = false;
-                  });
-                },
-              ),
-              const SizedBox(height: 16),
-              _PaymentMethodButton(
-                text: "クレジットカードを選択",
-                onPressed: () {},
-              ),
-              const SizedBox(height: 16),
-              const _Description(),
-            ],
+            ),
           ),
         ),
         Visibility(
@@ -143,7 +147,7 @@ class _MobileSectionState extends State<_MobileSection> {
     );
   }
 
-  Future<void> fetchAndOpenUrl() async {
+  Future<void> fetchAndOpenUrl(int amount) async {
     const apiUrl =
         'https://us-central1-beau-gift-dev.cloudfunctions.net/api/paypay/oneTapCall';
 
@@ -153,9 +157,12 @@ class _MobileSectionState extends State<_MobileSection> {
       'User-Agent': 'Your-User-Agent-Here'
     };
 
+    // 手数料分を追加
+    amount = (amount + amount * 0.1) as int;
+
     // リクエストのbody
     final body = json.encode({
-      'amount': 2000,
+      'amount': amount,
     });
 
     final response = await http.post(
