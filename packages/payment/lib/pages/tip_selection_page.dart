@@ -2,8 +2,9 @@ import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
+import 'package:payment/navigation/router.dart';
 import 'package:payment/pages/indented_bullet_text.dart';
-import 'package:payment/pages/payment_selection_page.dart';
 import 'package:theme/colors.dart';
 
 class TipSelectionPage extends StatelessWidget {
@@ -220,9 +221,7 @@ class _TipButton extends StatelessWidget {
                     style: TextStyle(
                         color: Colors.grey, fontWeight: FontWeight.bold),
                   ),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
+                  onPressed: () => context.pop(),
                 ),
                 TextButton(
                   child: const Text(
@@ -233,15 +232,8 @@ class _TipButton extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.pop(context);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => PaymentSelectionPage(
-                          amount: amount,
-                        ),
-                      ),
-                    );
+                    context.pop();
+                    PaymentSelectionRoute(amount: amount).push(context);
                   },
                 ),
               ],

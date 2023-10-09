@@ -20,10 +20,24 @@ dependencies:
   font_awesome_flutter: ^10.5.0
   lottie: ^2.6.0
 
+  # Navigation
+  go_router: ^11.1.2
+
+  # State
+  flutter_riverpod: ^2.4.3
+  riverpod_annotation: ^2.2.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+  build_runner: ^2.4.6
+
+  # Navigation
+  go_router_builder: ^2.3.3
+
+  # State
+  riverpod_generator: ^2.3.3
 
 flutter:
   uses-material-design: true

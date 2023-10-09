@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:payment/pages/tip_selection_page.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:payment/navigation/router.dart';
 
-class PaymentPackage extends StatelessWidget {
+class PaymentPackage extends ConsumerWidget {
   const PaymentPackage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
+  Widget build(BuildContext context, WidgetRef ref) {
+    final router = ref.watch(routerProvider);
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      home: TipSelectionPage(),
+      routerConfig: router,
     );
   }
 }
