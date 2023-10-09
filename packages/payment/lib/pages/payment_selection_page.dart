@@ -212,8 +212,7 @@ class _PaymentMethodButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColor.primary,
           shape: RoundedRectangleBorder(
-            borderRadius:
-                BorderRadius.circular(10), // ここの値を調整して、角の丸みの大きさを変更できます。
+            borderRadius: BorderRadius.circular(10),
           ),
         ),
         child: Text(text),
