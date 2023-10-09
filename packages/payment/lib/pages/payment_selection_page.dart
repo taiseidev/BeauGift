@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:lottie/lottie.dart';
 import 'package:payment/pages/indented_bullet_text.dart';
+import 'package:payment/pages/transaction_complate_page.dart';
 import 'package:theme/colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -124,7 +125,11 @@ class _MobileSectionState extends State<_MobileSection> {
                   const SizedBox(height: 16),
                   _PaymentMethodButton(
                     text: "クレジットカード（Stripe）を選択",
-                    onPressed: () {},
+                    onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const TransactionCompletePage())),
                   ),
                   const SizedBox(height: 16),
                   const _Description(),

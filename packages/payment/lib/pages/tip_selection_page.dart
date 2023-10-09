@@ -98,7 +98,7 @@ class _WorkerProfile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              "affect【アフェクト】",
+              "arrows【アローズ】",
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w700,
@@ -107,7 +107,7 @@ class _WorkerProfile extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              "佐藤 雄一",
+              "テスト 太郎",
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
