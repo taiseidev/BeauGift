@@ -37,4 +37,8 @@ dev_dependencies:
   build_runner: ^2.4.6
 
 flutter:
+  fonts:
+    - family: NotoSansJP
+      fonts:
+        - asset: ../../assets/fonts/Noto_Sans_JP/static/NotoSansJP-Regular.ttf
   uses-material-design: true

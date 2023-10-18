@@ -19,6 +19,9 @@ class MyApp extends ConsumerWidget {
 
     return MaterialApp.router(
       title: 'Flutter Demo',
+      theme: ThemeData(
+        fontFamily: 'NotoSansJP',
+      ),
       routerConfig: router,
     );
   }
